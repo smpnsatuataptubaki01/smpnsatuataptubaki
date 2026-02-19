@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pendaftaran - <%= siswa.nama_lengkap %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css"> 
+    <style>
+        .container-detail { padding: 50px; max-width: 800px; margin: 40px auto; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-family: 'Poppins', sans-serif; }
+        .data-row { display: flex; border-bottom: 1px solid #eee; padding: 12px 0; }
+        .data-label { width: 200px; font-weight: bold; color: #003366; }
+        .btn-download { display: inline-block; padding: 12px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .btn-download:hover { background: #218838; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .btn-back { display: inline-block; margin-top: 30px; color: #003366; text-decoration: none; font-weight: 600; }
+        .btn-back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="background: #f4f7f6;">
+    <div class="container-detail">
+        <h2 style="color: #003366;"><i class="fas fa-user-graduate"></i> Detail Pendaftaran: <%= siswa.nama_lengkap %></h2>
+        <hr>
+        
+        <div class="data-row"><div class="data-label">Nama Lengkap</div><div>: <%= siswa.nama_lengkap %></div></div>
+        <div class="data-row"><div class="data-label">Sekolah Asal</div><div>: <%= siswa.sekolah_asal %></div></div>
+        <div class="data-row"><div class="data-label">WhatsApp</div><div>: <%= siswa.whatsapp %></div></div>
+        
+        <h3 style="margin-top:30px; color: #003366;"><i class="fas fa-file-alt"></i> Dokumen Persyaratan</h3>
+        
+        <% if (siswa.dokumen_syarat) { %>
+            <div style="background: #e9ecef; padding: 20px; border-radius: 8px; text-align: center;">
+                <p style="margin-bottom: 15px; font-size: 0.9rem;">File tersimpan: <strong><%= siswa.dokumen_syarat %></strong></p>
+                
+                <a href="/uploads/docs/<%= siswa.dokumen_syarat %>" target="_blank" class="btn-download">
+                    <i class="fas fa-external-link-alt"></i> Buka / Download Dokumen
+                </a>
+            </div>
+        <% } else { %>
+            <div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba;">
+                <i class="fas fa-exclamation-triangle"></i> Dokumen belum diunggah oleh pendaftar.
+            </div>
+        <% } %>
+
+        <br>
+        <a href="/admin" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Panel Kontrol Admin</a>
+    </div>
+</body>
+</html>

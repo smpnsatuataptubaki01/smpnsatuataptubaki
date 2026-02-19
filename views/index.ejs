@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        /* --- CSS Global & Penunjang Layout --- */
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #b8860b;
+            --danger-red: #e74c3c;
+        }
+
+        .swiper-berita { 
+            width: 100%; 
+            margin: 0 auto; 
+            padding-bottom: 40px; 
+            overflow: hidden; 
+        }
+
+        .news-card { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            height: 100%; 
+            transition: 0.3s; 
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card:hover { transform: translateY(-5px); }
+        .news-img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            background-color: #f0f0f0;
+        }
+        .news-text { padding: 15px; flex-grow: 1; }
+        
+        .news-text h4 { 
+            min-height: 45px; 
+            margin-bottom: 8px; 
+            color: var(--primary-blue);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* --- Pengumuman Styling --- */
+        .ann-list-dynamic { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        }
+        .ann-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 10px; 
+            padding: 12px 0; 
+            border-bottom: 1px dashed #ddd; 
+        }
+        .ann-item:last-child { border: none; }
+
+        .title-with-line { 
+            border-left: 5px solid #ffcc00; 
+            padding-left: 15px; 
+            margin-bottom: 25px; 
+            color: var(--primary-blue); 
+            text-transform: uppercase; 
+            font-size: 1.5rem; 
+            font-weight: 700;
+        }
+
+        .btn-all {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            text-decoration: none;
+            padding: 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-all:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
+            </div>
+        </div>
+        <div class="date-info" id="currentDate"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="#">PROFIL ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
+                        <li><a href="/visimisi">Visi & Misi</a></li>
+                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
+                    </ul>
+                </li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
+                <li><a href="/kontak">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="slider-container">
+        <div class="slider-wrapper">
+            <% if (typeof daftarSlider !== 'undefined' && daftarSlider.length > 0) { %>
+                <% daftarSlider.forEach(function(slider) { %>
+                    <div class="slide">
+                        <img src="/gambar/<%= slider.gambar %>" alt="<%= slider.judul %>">
+                        <div class="slide-content">
+                            <span class="tag">Info Sekolah</span>
+                            <h1><%= slider.judul %></h1>
+                            <p><%= slider.sub_judul %></p>
+                            <div class="slide-btns">
+                                <a href="/formulir" class="btn-primary">Daftar Sekarang</a>
+                                <a href="/tentang-sekolah" class="btn-secondary">Tentang Kami</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+    </header>
+
+    <div class="running-text">
+        <div class="announcement-label">Pengumuman 📢</div>
+        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+            Selamat Datang di Website Resmi SMPN SATU ATAP TUBAKI! Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026-2027 telah dibuka.
+        </marquee>
+    </div>
+
+    <section class="quick-access">
+        <h2>Akses Cepat</h2>
+        <div class="card-container">
+            <a href="/tentang-sekolah" class="card" style="text-decoration: none; color: inherit;">
+                <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Profil Sekolah</h3>
+            </a>
+            <a href="/berita" class="card" style="text-decoration: none; color: inherit;">
+                <div class="card-icon"><i class="fa-solid fa-newspaper"></i></div>
+                <h3>Informasi</h3>
+            </a>
+            <a href="/formulir" class="card" style="text-decoration: none; color: inherit;">
+                <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <h3>PPDB</h3>
+            </a>
+            <a href="/galeri" class="card" style="text-decoration: none; color: inherit;">
+                <div class="card-icon"><i class="fa-solid fa-image"></i></div>
+                <h3>Galeri</h3>
+            </a>
+        </div>
+    </section>
+
+    <section class="welcome-section">
+        <div class="welcome-container">
+            <div class="welcome-img">
+                <img src="/gambar/kepalasekolah.jpg" alt="Kepala Sekolah">
+            </div>
+            <div class="welcome-content">
+                <span>Sambutan Kepala Sekolah</span>
+                <h2>Selamat Datang di Keluarga Besar SMPN SATAP TUBAKI</h2>
+                <p>Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas karunia-Nya sehingga website resmi ini dapat terwujud...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-container-new">
+        <div class="stat-box blue-card">
+            <div class="stat-info">
+                <h3 class="counter" data-target="<%= stats.ruang_belajar %>">0</h3>
+                <p>RUANG BELAJAR</p>
+            </div>
+            <i class="fa-solid fa-school"></i>
+        </div>
+        <div class="stat-box green-card">
+            <div class="stat-info">
+                <h3 class="counter" data-target="<%= stats.tenaga_pendidik %>">0</h3>
+                <p>TENAGA PENDIDIK</p>
+            </div>
+            <i class="fa-solid fa-chalkboard-user"></i>
+        </div>
+        <div class="stat-box lime-card">
+            <div class="stat-info">
+                <h3 class="counter" data-target="<%= stats.tenaga_kependidikan %>">0</h3>
+                <p>TENAGA KEPENDIDIKAN</p>
+            </div>
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+        <div class="stat-box red-card">
+            <div class="stat-info">
+                <h3 class="counter" data-target="<%= stats.murid %>">0</h3>
+                <p>MURID</p>
+            </div>
+            <i class="fa-solid fa-users"></i>
+        </div>
+    </section>
+
+    <section class="news-announcement-section" style="padding: 60px 5%; background: #f4f7f6;">
+        <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4%;">
+            
+            <div style="flex: 0 0 68%; min-width: 320px;">
+                <h2 class="title-with-line">Berita Terbaru</h2>
+                <div class="swiper swiper-berita">
+                    <div class="swiper-wrapper">
+                        <% if (typeof daftarBerita !== 'undefined' && daftarBerita.length > 0) { %>
+                            <% daftarBerita.forEach(function(berita) { %>
+                                <div class="swiper-slide">
+                                    <div class="news-card">
+                                        <img src="/gambar/<%= berita.gambar %>" class="news-img" onerror="this.src='/gambar/default.jpg'">
+                                        <div class="news-text">
+                                            <h4><%= berita.judul %></h4>
+                                            <p style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                                <%= berita.isi ? berita.isi.replace(/<[^>]*>?/gm, '') : '' %>
+                                            </p>
+                                            <a href="/berita/<%= berita.id %>" style="display:inline-block; margin-top:10px; color:#b8860b; font-weight:600; text-decoration:none; font-size:0.8rem;">Selengkapnya →</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <div style="flex: 0 0 28%; min-width: 280px;">
+                <h2 class="title-with-line" style="border-left-color: var(--danger-red);">Pengumuman</h2>
+                <div class="ann-list-dynamic">
+                    <% if (typeof daftarPengumuman !== 'undefined' && daftarPengumuman.length > 0) { %>
+                        <% daftarPengumuman.forEach(function(p) { %>
+                            <div class="ann-item">
+                                <i class="fa-solid fa-file-pdf" style="color: var(--danger-red); font-size: 1rem; margin-top: 3px;"></i>
+                                <a href="/uploads/docs/<%= p.file_pdf %>" target="_blank" style="text-decoration:none; color:#333; font-size:0.85rem; font-weight:500; line-height: 1.3;">
+                                    <%= p.judul %>
+                                </a>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p style="font-size: 0.8rem; color: #999;">Tidak ada pengumuman terbaru.</p>
+                    <% } %>
+
+                    <a href="/pengumuman" class="btn-all">LIHAT SELENGKAPNYA →</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="/gambar/logo1.png" alt="Logo">
+                    <div><h4>SMPN Satu Atap</h4><span>Tubaki</span></div>
+                </div>
+                <p class="tagline">Tut Wuri Handayani - Mendidik generasi penerus bangsa.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <div class="contact-item"><i class="fa-solid fa-location-dot"></i><p>Desa Tubaki, Kupang, NTT</p></div>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+        // Inisialisasi Swiper Berita
+        var swiperBerita = new Swiper(".swiper-berita", {
+            slidesPerView: 1,
+            spaceBetween: 25,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1200: { slidesPerView: 2 } 
+            }
+        });
+
+        // Counter Statistik
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / 200;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 10);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+
+        // Set Tanggal Hari Ini
+        const dateElement = document.getElementById('currentDate');
+        if(dateElement) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.innerHTML = new Date().toLocaleDateString('id-ID', options);
+        }
+    </script>
+</body>
+</html>

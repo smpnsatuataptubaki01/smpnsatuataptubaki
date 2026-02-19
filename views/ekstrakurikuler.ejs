@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekstrakurikuler - SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* Hero Header */
+        .hero-ekskul {
+            background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), 
+                              url('/gambar/bg-ekskul.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-ekskul h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Section Konten */
+        .ekskul-section {
+            padding: 80px 10%;
+            background-color: #fffaf5;
+        }
+
+        .ekskul-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .ekskul-intro h2 {
+            font-family: 'Playfair Display', serif;
+            color: #003366;
+            margin-bottom: 20px;
+        }
+
+        /* Grid Ekstrakurikuler */
+        .ekskul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .ekskul-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            border-bottom: 4px solid #003366;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ekskul-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .ekskul-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .ekskul-info {
+            padding: 25px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .ekskul-info i {
+            font-size: 2rem;
+            color: #b8860b;
+            margin-bottom: 15px;
+        }
+
+        .ekskul-info h3 {
+            color: #003366;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .ekskul-info p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Badge Jadwal */
+        .jadwal-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #003366;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="#">PROFIL ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
+                        <li><a href="/visimisi">Visi & Misi</a></li>
+                    </ul>
+                </li>
+                <li><a href="/ekstrakurikuler" style="color: #b8860b;">KESISWAAN ▼</a></li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="/kontak">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="hero-ekskul">
+        <div class="hero-content">
+            <h1>Ekstrakurikuler</h1>
+            <p>Mengembangkan Bakat, Minat, dan Kreativitas Siswa</p>
+        </div>
+    </header>
+
+    <section class="ekskul-section">
+        <div class="ekskul-intro">
+            <h2>Pilihan Kegiatan Bakat & Minat</h2>
+            <p>Kami menyediakan berbagai wadah bagi siswa untuk mengeksplorasi potensi diri di luar jam pelajaran akademik.</p>
+        </div>
+
+        <div class="ekskul-grid">
+            <% if (typeof daftarEkskul !== 'undefined' && daftarEkskul.length > 0) { %>
+                <% daftarEkskul.forEach(ekskul => { %>
+                    <div class="ekskul-card">
+                        <img src="/gambar/<%= ekskul.gambar %>" alt="<%= ekskul.nama %>" class="ekskul-img">
+                        <div class="ekskul-info">
+                            <i class="<%= ekskul.ikon %>"></i>
+                            <h3><%= ekskul.nama %></h3>
+                            <p><%= ekskul.deskripsi %></p>
+                            <span class="jadwal-badge"><%= ekskul.jadwal %></span>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="ekskul-card">
+                    <img src="/gambar/berita1.JPG" alt="Pramuka" class="ekskul-img">
+                    <div class="ekskul-info">
+                        <i class="fa-solid fa-campground"></i>
+                        <h3>Pramuka</h3>
+                        <p>Membentuk karakter disiplin, mandiri, dan cinta alam melalui kegiatan kepanduan yang seru.</p>
+                        <span class="jadwal-badge">Sabtu, 14:00 WITA</span>
+                    </div>
+                </div>
+
+                <div class="ekskul-card">
+                    <img src="/gambar/berita3.JPG" alt="Olahraga" class="ekskul-img">
+                    <div class="ekskul-info">
+                        <i class="fa-solid fa-volleyball"></i>
+                        <h3>Bola Voli & Futsal</h3>
+                        <p>Wadah bagi pecinta olahraga untuk mengasah teknik, kerja sama tim, dan sportivitas.</p>
+                        <span class="jadwal-badge">Jumat, 15:30 WITA</span>
+                    </div>
+                </div>
+                
+                <% } %>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="/" style="background: #003366; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; display: inline-block;">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Home
+            </a>
+        </div>
+    </section>
+
+    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 40px 10% 20px;">
+        <div class="footer-bottom" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

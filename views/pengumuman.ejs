@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Resmi | SMPN SATU ATAP NANANENOE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        :root {
+            --primary-color: #003366;
+            --accent-color: #b8860b;
+            --bg-light: #f4f7f6;
+        }
+
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: #333; margin: 0; }
+
+        /* Banner */
+        .page-banner {
+            background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('/gambar/gedung-sekolah.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .page-banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* Tombol Kembali */
+        .btn-back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 10px 18px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+        }
+        .btn-back-home:hover { background: var(--primary-color); color: white; transform: translateX(-5px); }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 1000px;
+            margin: -30px auto 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+        }
+        .search-container input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Grid Pengumuman */
+        .announcement-grid {
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+        }
+
+        .ann-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s;
+            border-top: 5px solid var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .ann-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+
+        .ann-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; display: block; }
+        .ann-card h3 { color: var(--primary-color); font-size: 1.1rem; line-height: 1.4; margin-bottom: 15px; min-height: 3em; }
+
+        .btn-download {
+            background: #e74c3c;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-download:hover { background: #c0392b; }
+
+        .empty-state { text-align: center; grid-column: 1 / -1; padding: 50px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <section class="page-banner">
+        <h1>PENGUMUMAN</h1>
+        <p>Informasi Resmi, Surat Edaran, dan Dokumen Sekolah</p>
+    </section>
+
+    <div style="max-width: 1100px; margin: 30px auto 0; padding: 0 5%;">
+        <a href="/" class="btn-back-home">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari judul pengumuman atau dokumen..." onkeyup="filterAnnouncements()">
+    </div>
+
+    <section class="announcement-grid" id="annContainer">
+        <% if (typeof daftarPengumuman !== 'undefined' && daftarPengumuman.length > 0) { %>
+            <% daftarPengumuman.forEach(function(p) { %>
+                <div class="ann-card">
+                    <div>
+                        <span class="ann-date">
+                            <i class="fa-regular fa-calendar-days"></i> 
+                            <%= p.created_at ? new Date(p.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Baru' %>
+                        </span>
+                        <h3><%= p.judul %></h3>
+                    </div>
+                    <div>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 15px;">
+                        <a href="/uploads/docs/<%= p.file_pdf %>" 
+                           download="<%= p.judul %>.pdf" 
+                           target="_blank" 
+                           class="btn-download">
+                            <i class="fa-solid fa-file-pdf"></i> Unduh Dokumen (PDF)
+                        </a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fa-solid fa-folder-open fa-3x" style="margin-bottom: 15px; display: block;"></i>
+                <p>Belum ada pengumuman resmi yang dipublikasikan.</p>
+            </div>
+        <% } %>
+    </section>
+
+    <script>
+        function filterAnnouncements() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('ann-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

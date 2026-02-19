@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css"> 
+    
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #0055aa 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card img {
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .login-card h2 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .login-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px; /* Spasi untuk ikon */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 51, 102, 0.2);
+        }
+
+        .btn-login {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-login:hover {
+            background: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #777;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <img src="/gambar/logo1.png" alt="Logo SMPN Tubaki">
+        <h2>Panel Admin</h2>
+        <p>Akses Terbatas - Silakan Login</p>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-container">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Masukkan username" required autocomplete="off">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-container">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">Masuk Sekarang</button>
+        </form>
+
+        <a href="/" class="back-home">
+            <i class="fa fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+    </div>
+
+</body>
+</html>

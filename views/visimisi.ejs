@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visi & Misi - SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #b8860b;
+            --soft-cream: #fffaf5;
+        }
+
+        /* Hero Header */
+        .hero-visi {
+            background-image: linear-gradient(rgba(0, 51, 102, 0.75), rgba(0, 51, 102, 0.75)), 
+                              url('/gambar/bg-visi.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-visi h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Main Section */
+        .visi-misi-section {
+            padding: 100px 10%;
+            background-color: var(--soft-cream);
+        }
+
+        /* Visi Card - Polished */
+        .visi-container {
+            text-align: center;
+            max-width: 900px;
+            margin: -150px auto 80px; /* Overlap dengan hero */
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 5;
+        }
+
+        .visi-container::before {
+            content: "\f10d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-size: 3rem;
+            color: rgba(184, 134, 11, 0.1);
+        }
+
+        .visi-container i {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .visi-container h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .visi-container p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #333;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* Misi Grid */
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-blue);
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+        }
+
+        .misi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .misi-item {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            transition: 0.4s;
+            border-bottom: 4px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .misi-item:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .misi-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 51, 102, 0.05);
+            color: var(--primary-blue);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .misi-item:hover .misi-icon {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .misi-content h4 {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .misi-content p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .btn-back {
+            background: var(--primary-blue);
+            color: white;
+            padding: 18px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(0,51,102,0.15);
+        }
+
+        .btn-back:hover {
+            background: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-visi h1 { font-size: 2.5rem; }
+            .visi-container { padding: 40px 20px; margin-top: -100px; }
+            .visi-container p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header" style="display: flex; align-items: center; padding: 15px 10%; background: white;">
+        <img src="/gambar/logo1.png" alt="Logo" style="height: 55px; margin-right: 15px;">
+        <div style="line-height: 1.2;">
+            <span style="font-size: 0.75rem; color: #777; font-weight: 600; letter-spacing: 1px;">PROFIL LEMBAGA</span><br>
+            <span style="font-weight: bold; color: var(--primary-blue); font-size: 1.1rem;">SMPN SATU ATAP TUBAKI</span>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="#" style="color: var(--accent-gold);">PROFIL ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
+                        <li><a href="/visimisi">Visi & Misi</a></li>
+                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="/kurikulum">AKADEMIK</a></li>
+                <li><a href="/osis">KESISWAAN</a></li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="/kontak">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="hero-visi">
+        <div class="hero-content">
+            <h1>Visi & Misi</h1>
+            <p>Landasan Spiritual dan Intelektual Sekolah Kami</p>
+        </div>
+    </header>
+
+    <section class="visi-misi-section">
+        <div class="visi-container">
+            <i class="fa-solid fa-bullseye"></i>
+            <h2>Visi Kami</h2>
+            <p>"Menjadi lembaga pendidikan yang unggul dalam mencetak generasi cerdas, berkarakter, dan berbudaya lingkungan di wilayah perbatasan."</p>
+        </div>
+
+        <h2 class="section-title">Misi Strategis</h2>
+        
+        <div class="misi-grid">
+            <div class="misi-item">
+                <div class="misi-icon"><i class="fa-solid fa-book-open"></i></div>
+                <div class="misi-content">
+                    <h4>Kualitas Akademik</h4>
+                    <p>Menyelenggarakan proses pembelajaran yang inovatif, efektif, dan menyenangkan berbasis Kurikulum Merdeka untuk memaksimalkan potensi siswa.</p>
+                </div>
+            </div>
+
+            <div class="misi-item">
+                <div class="misi-icon"><i class="fa-solid fa-hands-praying"></i></div>
+                <div class="misi-content">
+                    <h4>Pendidikan Karakter</h4>
+                    <p>Menanamkan nilai-nilai religius, kejujuran, dan disiplin sebagai fondasi utama dalam membentuk pribadi yang berakhlak mulia.</p>
+                </div>
+            </div>
+
+            <div class="misi-item">
+                <div class="misi-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="misi-content">
+                    <h4>Kesadaran Lingkungan</h4>
+                    <p>Membudayakan sikap peduli lingkungan hidup melalui program sekolah hijau (Green School) demi keberlanjutan masa depan.</p>
+                </div>
+            </div>
+
+            <div class="misi-item">
+                <div class="misi-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="misi-content">
+                    <h4>Kearifan Lokal</h4>
+                    <p>Mengintegrasikan potensi dan budaya lokal Pulau Semau ke dalam kegiatan pendidikan untuk menjaga identitas daerah.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 80px;">
+            <a href="/" class="btn-back">
+                <i class="fa-solid fa-house"></i> Kembali ke Beranda
+            </a>
+        </div>
+    </section>
+
+    <footer style="background-color: var(--primary-blue); color: white; padding: 60px 10% 30px; text-align: center;">
+        <div style="margin-bottom: 30px; opacity: 0.8;">
+            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 10px;">SMPN SATU ATAP TUBAKI</h3>
+            <p>Mencetak Generasi Unggul di Batas Negeri</p>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.85rem; opacity: 0.6;">
+            &copy; 2026 SMPN Satu Atap Tubaki. Seluruh Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+</body>
+</html>

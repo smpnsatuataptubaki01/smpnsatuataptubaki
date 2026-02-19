@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran - SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* Hero Header Form */
+        .hero-form {
+            background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), 
+                              url('/gambar/bg-ppdb.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-form h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+        }
+
+        /* Form Container */
+        .form-section {
+            padding: 60px 10%;
+            background-color: #fffaf5;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        /* Styling khusus untuk input file */
+        .form-group input[type="file"] {
+            padding: 8px;
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .form-group input:focus {
+            border-color: #b8860b;
+            outline: none;
+            box-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-section-title {
+            border-bottom: 2px solid #b8860b;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            margin-top: 40px;
+            color: #003366;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+        }
+
+        .form-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .btn-submit {
+            background-color: #b8860b;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #003366;
+        }
+
+        .file-info {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="/guru">PROFIL ▼</a></li>
+                <li><a href="/kurikulum">AKADEMIK ▼</a></li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="/formulir" style="color: #b8860b;">PPDB ▼</a></li>
+                <li><a href="/kontak">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="hero-form">
+        <h1>Formulir Pendaftaran Online</h1>
+    </header>
+
+    <section class="form-section">
+        <div class="form-container">
+            <form action="/daftar-ppdb" method="POST" enctype="multipart/form-data">
+                
+                <h3 class="form-section-title"><i class="fa-solid fa-user"></i> Data Pribadi Siswa</h3>
+                
+                <div class="form-group">
+                    <label>Nama Lengkap (Sesuai Ijazah)</label>
+                    <input type="text" name="nama_lengkap" placeholder="Masukkan nama lengkap" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>NISN</label>
+                        <input type="number" name="nisn" placeholder="Nomor Induk Siswa Nasional" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select name="jenis_kelamin" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" placeholder="Contoh: Kupang" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" required>
+                    </div>
+                </div>
+
+                <h3 class="form-section-title"><i class="fa-solid fa-school"></i> Data Sekolah Asal</h3>
+                
+                <div class="form-group">
+                    <label>Nama Sekolah Asal (SD/MI)</label>
+                    <input type="text" name="sekolah_asal" placeholder="Masukkan nama SD asal" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat Sekolah Asal</label>
+                    <textarea name="alamat_sekolah" rows="2" placeholder="Masukkan alamat lengkap sekolah asal"></textarea>
+                </div>
+
+                <h3 class="form-section-title"><i class="fa-solid fa-users"></i> Data Orang Tua / Wali</h3>
+                
+                <div class="form-group">
+                    <label>Nama Ayah/Ibu/Wali</label>
+                    <input type="text" name="nama_ortu" placeholder="Nama lengkap orang tua" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor WhatsApp Aktif</label>
+                    <input type="tel" name="whatsapp" placeholder="Contoh: 081234567890" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat Lengkap Domisili</label>
+                    <textarea name="alamat_domisili" rows="3" placeholder="Nama jalan, RT/RW, kelurahan, kecamatan" required></textarea>
+                </div>
+
+                <h3 class="form-section-title"><i class="fa-solid fa-file-arrow-up"></i> Dokumen Persyaratan</h3>
+                <div class="form-group">
+                    <label>Unggah Dokumen (KK / Ijazah / SKL)</label>
+                    <input type="file" name="dokumen_syarat" accept=".pdf,.jpg,.jpeg,.png" required>
+                    <small class="file-info">*Format: PDF, JPG, atau PNG (Maks. 2MB)</small>
+                </div>
+
+                <button type="submit" class="btn-submit">Kirim Pendaftaran</button>
+
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="/" style="background: #003366; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; display: inline-block;">
+                <i class="fa-solid fa-house"></i> Kembali ke Home
+            </a>
+        </div>
+    </section>
+
+    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 40px 10% 20px;">
+        <div class="footer-bottom" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+            <p style="font-size: 0.8rem; opacity: 0.6;">&copy; 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

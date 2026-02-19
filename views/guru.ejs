@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenaga Pendidik - SMPN SATU ATAP TUBAKI</title>
+    
+    <link rel="preload" as="image" href="/gambar/slide1.jpg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* CSS Khusus Halaman Guru - Optimasi Anti-Flicker */
+        .hero-teachers {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), 
+                        url('/gambar/slide1.jpg') no-repeat center center;
+            background-size: cover;
+            height: 300px; /* Sedikit diperpendek agar lebih proporsional */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            /* Menghilangkan kedipan saat memuat */
+            background-color: #003366; 
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-content p {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Container & Grid */
+        .teachers-section {
+            background-color: #f4f7f6;
+            padding: 80px 5%;
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Teacher Card Styling */
+        .teacher-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 5px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-top: 5px solid #b8860b;
+        }
+
+        .teacher-img-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, #003366, #b8860b);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .teacher-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+            border: 3px solid white;
+        }
+
+        .teacher-card h3 {
+            color: #003366;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .teacher-card .role {
+            color: #b8860b;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: #fff9e6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .no-data {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Animasi */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            .hero-teachers { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
+            </div>
+        </div>
+        <div class="date-info" id="currentDate"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="#">PROFIL ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
+                        <li><a href="/visimisi">Visi & Misi</a></li>
+                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="/kontak">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="hero-teachers">
+        <div class="hero-content">
+            <h1>Tenaga Pendidik</h1>
+            <p>Berdedikasi dalam mendidik generasi emas bangsa</p>
+        </div>
+    </header>
+
+    <section class="teachers-section">
+        <div class="teachers-grid">
+            
+            <% if (typeof daftarGuru !== 'undefined' && daftarGuru.length > 0) { %>
+                <% daftarGuru.forEach(guru => { %>
+                    <div class="teacher-card">
+                        <div class="teacher-img-wrapper">
+                            <img src="/gambar/<%= guru.foto %>" 
+                                 alt="<%= guru.nama %>" 
+                                 class="teacher-img"
+                                 onerror="this.src='/gambar/default-user.png'">
+                        </div>
+                        <h3><%= guru.nama %></h3>
+                        <span class="role"><%= guru.jabatan %></span>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="no-data">
+                    <i class="fa-solid fa-users-slash" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
+                    <h3>Belum Ada Data</h3>
+                    <p>Silakan upload data guru melalui Dashboard Admin.</p>
+                </div>
+            <% } %>
+
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="/gambar/logo1.png" alt="Logo">
+                    <div><h4>SMPN Satu Atap</h4><span>Tubaki</span></div>
+                </div>
+                <p class="tagline">Tut Wuri Handayani - Mendidik generasi bangsa.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak Kami</h4>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Desa Tubaki, Kec. Nanaet Duabesi, Belu, NTT</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update Tanggal Real-time
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateEl = document.getElementById('currentDate');
+            if(dateEl) dateEl.innerText = now.toLocaleDateString('id-ID', options);
+        }
+        updateDate();
+    </script>
+</body>
+</html>

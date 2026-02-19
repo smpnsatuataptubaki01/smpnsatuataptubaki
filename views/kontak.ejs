@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - SMPN SATU ATAP TUBAKI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* Hero Header Kontak */
+        .hero-kontak {
+            background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), 
+                              url('/gambar/bg-kontak.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-kontak h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 10%;
+            background-color: #fffaf5;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* Info Card */
+        .contact-info {
+            background: #003366;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            height: fit-content;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: #b8860b;
+            margin-top: 5px;
+        }
+
+        .info-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .info-item p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Form Card */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .contact-form h2 {
+            font-family: 'Playfair Display', serif;
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #b8860b;
+            background-color: #fff;
+        }
+
+        .btn-send {
+            background: #b8860b;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-send:hover {
+            background: #003366;
+            transform: translateY(-3px);
+        }
+
+        /* Map */
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 5px solid white;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-kontak h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 10%;">
+        <div class="logo-wrapper" style="display: flex; align-items: center;">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 60px; margin-right: 15px;">
+            <div>
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #003366; margin: 0;">SMPN SATU ATAP TUBAKI</h1>
+                <p style="font-size: 0.8rem; color: #666; margin: 0;">CERDAS, BERKARAKTER, BERBUDAYA</p>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 HOME</a></li>
+                <li><a href="#">PROFIL ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
+                        <li><a href="/visimisi">Visi & Misi</a></li>
+                    </ul>
+                </li>
+                <li><a href="/kurikulum">AKADEMIK</a></li>
+                <li><a href="/berita">BERITA</a></li>
+                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="/kontak" style="color: #b8860b;">KONTAK</a></li>
+            </ul>
+            <a href="/login" class="btn-login">👤 LOGIN</a>
+        </div>
+    </nav>
+
+    <header class="hero-kontak">
+        <div class="hero-content">
+            <h1>Kontak Kami</h1>
+            <p style="font-weight: 300; font-style: italic;">Kami siap melayani pertanyaan dan aspirasi Anda</p>
+        </div>
+    </header>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Alamat Sekolah</h4>
+                        <p>Desa Tubaki, Kec. Nanaet Duabesi, Kab. Belu, Nusa Tenggara Timur</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Telepon/WA</h4>
+                        <p>+62 812-3456-7890</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email Resmi</h4>
+                        <p>info@smpnsatuataptubaki.sch.id</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Sabtu: 07:30 - 14:00 WITA</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Kirim Pesan</h2>
+                <form action="/send-message" method="POST">
+                    <input type="text" name="nama" class="form-input" placeholder="Nama Lengkap" required>
+                    <input type="email" name="email" class="form-input" placeholder="Alamat Email" required>
+                    <input type="text" name="subject" class="form-input" placeholder="Subjek / Perihal">
+                    <textarea name="pesan" class="form-input" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                    <button type="submit" class="btn-send">Kirim Pesan <i class="fa-solid fa-paper-plane" style="margin-left: 10px;"></i></button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126200.0!2d124.8!3d-9.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2eb7d1!2sBelu%2C%20East%20Nusa%20Tenggara!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 60px 10% 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+            <div>
+                <h4 style="margin-bottom: 20px; color: #b8860b;">SMPN SATU ATAP TUBAKI</h4>
+                <p style="font-size: 0.9rem; opacity: 0.7; line-height: 1.8;">Membangun masa depan generasi perbatasan yang cerdas, berkarakter, dan bangga akan budayanya.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Tautan Cepat</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2;">
+                    <li><a href="/" style="color: white; opacity: 0.7; text-decoration: none;">Beranda</a></li>
+                    <li><a href="/guru" style="color: white; opacity: 0.7; text-decoration: none;">Tenaga Pendidik</a></li>
+                    <li><a href="/galeri" style="color: white; opacity: 0.7; text-decoration: none;">Galeri Foto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Ikuti Kami</h4>
+                <div style="display: flex; gap: 20px; font-size: 1.5rem;">
+                    <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="color: white;"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
+            <p style="font-size: 0.85rem; opacity: 0.5;">© 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

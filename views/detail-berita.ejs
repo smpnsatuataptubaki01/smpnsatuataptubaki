@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= berita.judul %> - SMPN SATAP TUBAKI</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { 
+            background: #f4f7f6; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            padding: 0;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 50px auto; 
+            padding: 30px; 
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            color: #b8860b; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: 0.3s;
+        }
+        .back-link:hover { 
+            color: #1e3a5f;
+            transform: translateX(-5px);
+        }
+        .judul { 
+            font-size: 2.2rem; 
+            color: #1e3a5f; 
+            margin-bottom: 10px; 
+            line-height: 1.3; 
+            font-weight: 700;
+        }
+        .meta-data { 
+            color: #666; 
+            font-size: 0.9rem; 
+            margin-bottom: 25px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 15px; 
+        }
+        .meta-data i { margin-right: 8px; color: #b8860b; }
+        
+        /* Container Gambar Detail */
+        .detail-news-img {
+            width: 100%;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .berita-img { 
+            width: 100%; 
+            max-height: 500px; 
+            object-fit: cover; 
+            display: block; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        }
+        
+        .isi { 
+            line-height: 1.8; 
+            font-size: 1.15rem; 
+            color: #333; 
+            white-space: pre-line; 
+            text-align: justify; 
+        }
+        
+        footer-text {
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee;
+            font-size: 0.9rem; 
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .container { margin: 20px; padding: 20px; }
+            .judul { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+        
+        <h1 class="judul"><%= berita.judul %></h1>
+        
+        <div class="meta-data">
+            <span><i class="far fa-calendar-alt"></i> Diposting pada: <%= new Date(berita.tanggal).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+        </div>
+
+        <div class="detail-news-img">
+            <img src="/gambar/<%= berita.gambar %>" 
+                 class="berita-img" 
+                 alt="<%= berita.judul %>"
+                 onerror="this.src='/gambar/default-news.jpg'">
+        </div>
+        
+        <div class="isi">
+            <%= berita.isi %>
+        </div>
+
+        <div class="footer-text">
+            <p>&copy; 2026 SMPN SATAP TUBAKI - Semua Hak Dilindungi.</p>
+        </div>
+    </div>
+
+</body>
+</html>
