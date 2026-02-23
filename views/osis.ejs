@@ -54,23 +54,18 @@
             margin-bottom: 20px;
         }
 
-        .osis-intro p {
-            line-height: 1.8;
-            color: #555;
-            font-size: 1.1rem;
-        }
-
-        /* STRUKTUR ORGANISASI */
+        /* STRUKTUR ORGANISASI DYNAMIC */
         .osis-structure {
             margin-top: 50px;
             text-align: center;
         }
         
-        .structure-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            justify-content: center;
+            margin-top: 40px;
         }
 
         .osis-card {
@@ -78,26 +73,18 @@
             border-bottom: 4px solid var(--gold);
             padding: 25px;
             border-radius: 15px;
-            width: 240px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: 0.3s;
-            z-index: 2;
         }
 
         .osis-card:hover { transform: translateY(-5px); }
 
-        .osis-card.top-rank {
-            background: var(--primary-blue);
-            color: white;
-            border-bottom: 4px solid #f1c40f;
-        }
-
         .osis-photo {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
@@ -105,26 +92,22 @@
             background-color: #f4f4f4;
         }
 
-        .osis-card h5 { margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-        .osis-card p { margin: 8px 0 0; font-size: 1.1rem; font-weight: bold; color: var(--primary-blue); }
-        .osis-card.top-rank p { color: #f1c40f; }
-
-        /* Garis Penghubung */
-        .line-v {
-            width: 2px;
-            height: 40px;
-            background: #cbd5e0;
+        .osis-card h5 { 
+            margin: 0; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: #888;
+        }
+        
+        .osis-card p { 
+            margin: 8px 0 0; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            color: var(--primary-blue); 
         }
 
-        .structure-row {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 0;
-        }
-
-        /* Galeri */
+        /* Galeri / Kegiatan */
         .osis-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -138,36 +121,38 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             transition: 0.4s;
+            height: 100%;
         }
 
         .gallery-item:hover { transform: translateY(-10px); }
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
+            height: 230px;
             object-fit: cover;
         }
 
-        .gallery-desc { padding: 25px; text-align: center; }
-        .gallery-desc h4 { color: var(--primary-blue); margin-bottom: 8px; font-size: 1.2rem; }
-        .gallery-desc p { font-size: 0.9rem; color: #777; }
+        .gallery-desc { padding: 20px; text-align: center; }
+        .gallery-desc h4 { color: var(--primary-blue); margin-bottom: 8px; font-size: 1.1rem; }
+        .gallery-desc span { font-size: 0.8rem; color: var(--gold); font-weight: 600; }
 
         @media (max-width: 768px) {
             .hero-osis h1 { font-size: 2.5rem; }
-            .osis-card { width: 200px; }
+            .osis-section { padding: 40px 5%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 10%;">
-        <div class="logo-wrapper" style="display: flex; align-items: center;">
-            <img src="/gambar/logo1.png" alt="Logo" style="height: 60px; margin-right: 15px;">
-            <div>
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #003366; margin: 0;">SMPN SATU ATAP TUBAKI</h1>
-                <p style="font-size: 0.8rem; color: #666; margin: 0;">CERDAS, BERKARAKTER, BERBUDAYA</p>
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
             </div>
         </div>
+        <div class="date-info" id="currentDate"></div>
     </div>
 
     <nav>
@@ -176,25 +161,42 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
                     </ul>
                 </li>
-                <li><a href="/kurikulum">AKADEMIK</a></li>
-                <li><a href="#" style="color: var(--gold);">KESISWAAN ▼</a>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
                     <ul class="submenu">
                         <li><a href="/osis">OSIS</a></li>
                         <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
                     </ul>
                 </li>
                 <li><a href="/berita">BERITA</a></li>
-                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>
         </div>
     </nav>
+
 
     <header class="hero-osis">
         <div class="hero-content">
@@ -211,85 +213,45 @@
         </div>
 
         <div class="osis-structure">
-            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-blue); font-size: 2rem; margin-bottom: 40px;">Pengurus Inti OSIS</h3>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-blue); font-size: 2rem; margin-bottom: 10px;">Struktur Pengurus OSIS</h3>
+            <p class="text-muted">Periode Aktif Berjalan</p>
             
-            
-
-            <div class="structure-container">
-                <div class="osis-card top-rank">
-                    <img src="/gambar/default-user.jpg" class="osis-photo" alt="Ketua OSIS">
-                    <h5>Ketua OSIS</h5>
-                    <p>Siswa Unggul</p>
-                </div>
-                
-                <div class="line-v"></div>
-                
-                <div class="osis-card">
-                    <img src="/gambar/default-user.jpg" class="osis-photo" alt="Wakil OSIS">
-                    <h5>Wakil Ketua</h5>
-                    <p>Siswa Berbakat</p>
-                </div>
-
-                <div class="line-v"></div>
-
-                <div class="structure-row">
-                    <div class="osis-card">
-                        <img src="/gambar/default-user.jpg" class="osis-photo" alt="Sekretaris">
-                        <h5>Sekretaris</h5>
-                        <p>Siswa Teliti</p>
+            <div class="structure-grid">
+                <% if (typeof strukturOsis !== 'undefined' && strukturOsis.length > 0) { %>
+                    <% strukturOsis.forEach(s => { %>
+                        <div class="osis-card">
+                            <img src="/gambar/osis/struktur/<%= s.foto %>" class="osis-photo" onerror="this.src='/gambar/default-user.jpg'">
+                            <h5><%= s.jabatan %></h5>
+                            <p><%= s.nama %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div style="grid-column: 1/-1; padding: 50px; background: #eee; border-radius: 20px;">
+                        <p>Data pengurus belum diunggah.</p>
                     </div>
-                    <div class="osis-card">
-                        <img src="/gambar/default-user.jpg" class="osis-photo" alt="Bendahara">
-                        <h5>Bendahara</h5>
-                        <p>Siswa Amanah</p>
-                    </div>
-                </div>
-
-                <div class="line-v" style="height: 60px;"></div>
-                <h4 style="color: var(--primary-blue); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 30px;">Divisi Bidang (SEKBID)</h4>
-
-                <div class="structure-row">
-                    <div class="osis-card">
-                        <h5>SEKBID I</h5>
-                        <p style="font-size: 0.9rem;">Keagamaan</p>
-                    </div>
-                    <div class="osis-card">
-                        <h5>SEKBID II</h5>
-                        <p style="font-size: 0.9rem;">Budi Pekerti</p>
-                    </div>
-                    <div class="osis-card">
-                        <h5>SEKBID III</h5>
-                        <p style="font-size: 0.9rem;">Seni & Olahraga</p>
-                    </div>
-                </div>
+                <% } %>
             </div>
         </div>
 
-        <h3 style="text-align:center; font-family:'Playfair Display', serif; color:var(--primary-blue); font-size: 2.2rem; margin-top:100px;">Dokumentasi Kegiatan</h3>
+        <hr style="margin: 100px 0; opacity: 0.1;">
+
+        <h3 style="text-align:center; font-family:'Playfair Display', serif; color:var(--primary-blue); font-size: 2.2rem;">Dokumentasi Kegiatan</h3>
         <div style="width: 50px; height: 3px; background: var(--gold); margin: 15px auto 40px;"></div>
         
         <div class="osis-gallery">
-            <div class="gallery-item">
-                <img src="/gambar/berita1.JPG" alt="Kegiatan OSIS">
-                <div class="gallery-desc">
-                    <h4>Pemilihan Umum OSIS</h4>
-                    <p>Implementasi demokrasi di lingkungan sekolah melalui pemungutan suara langsung.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="/gambar/berita2.JPG" alt="Kegiatan OSIS">
-                <div class="gallery-desc">
-                    <h4>LDKS</h4>
-                    <p>Latihan Dasar Kepemimpinan Siswa untuk membentuk karakter yang tangguh.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="/gambar/berita3.JPG" alt="Kegiatan OSIS">
-                <div class="gallery-desc">
-                    <h4>Program Lingkungan</h4>
-                    <p>Aksi peduli kebersihan dan penghijauan di lingkungan Satap Tubaki.</p>
-                </div>
-            </div>
+            <% if (typeof kegiatanOsis !== 'undefined' && kegiatanOsis.length > 0) { %>
+                <% kegiatanOsis.forEach(k => { %>
+                    <div class="gallery-item">
+                        <img src="/gambar/osis/kegiatan/<%= k.gambar %>" onerror="this.src='/gambar/default.jpg'">
+                        <div class="gallery-desc">
+                            <span><i class="fa-regular fa-calendar"></i> <%= new Date(k.tanggal).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }) %></span>
+                            <h4><%= k.judul_kegiatan %></h4>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p style="grid-column: 1/-1; text-align: center; color: #999;">Belum ada dokumentasi kegiatan.</p>
+            <% } %>
         </div>
 
         <div style="text-align: center; margin-top: 80px;">
@@ -299,7 +261,7 @@
         </div>
     </section>
 
-    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 60px 10% 20px;">
+    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 40px 10% 20px;">
         <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
             <p style="font-size: 0.85rem; opacity: 0.5;">© 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
         </div>

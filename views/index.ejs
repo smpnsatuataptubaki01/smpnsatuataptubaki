@@ -97,9 +97,147 @@
             background: var(--primary-blue);
             color: white;
         }
+
+        .welcome-section {
+            padding: 60px 5%;
+            background: #fff;
+        }
+        .welcome-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .headmaster-img-wrapper {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .headmaster-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 5px solid white;
+        }
+        .welcome-content {
+            flex: 1.5;
+            min-width: 300px;
+        }
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* --- STYLE MODAL BROSUR --- */
+        .modal-brosur {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow: auto;
+        }
+        .modal-content-brosur {
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 800px;
+            position: relative;
+            text-align: center;
+            animation: zoomIn 0.4s;
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.5); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        .close-brosur {
+            position: absolute;
+            right: 15px; top: 10px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-brosur:hover { color: #000; }
+
+        /* --- UPDATE LAYOUT 3 KOLOM (BERITA - PENGUMUMAN - BROSUR) --- */
+        .main-layout-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px; 
+            padding: 0 20px;
+        }
+
+        .berita-col {
+            flex: 0 0 45%; 
+            min-width: 0;
+        }
+
+        .pengumuman-col {
+            flex: 0 0 20%; 
+            min-width: 0;
+        }
+
+        .brosur-col {
+            flex: 0 0 30%; 
+            min-width: 0;
+        }
+
+        /* Styling Gambar Brosur agar Utuh & Jelas */
+        .brosur-display-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            object-fit: contain; 
+            transition: transform 0.3s;
+        }
+
+        .brosur-display-img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .berita-col, .pengumuman-col, .brosur-col {
+                flex: 1 0 100%;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <% if (locals.brosur) { %>
+        <div id="brosurModal" class="modal-brosur">
+            <div class="modal-content-brosur">
+                <span class="close-brosur">&times;</span>
+                <h2 style="color: var(--primary-blue); margin-bottom: 15px;"><%= brosur.judul %></h2>
+                <img src="/gambar/brosur/<%= brosur.gambar %>" alt="Brosur Sekolah" style="width:100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <div style="margin-top: 15px;">
+                    <a href="/gambar/brosur/<%= brosur.gambar %>" download class="btn-primary" style="padding: 10px 20px; text-decoration: none; display: inline-block;">Download Brosur</a>
+                </div>
+            </div>
+        </div>
+    <% } %>
 
     <div class="top-header">
         <div class="logo-wrapper">
@@ -118,10 +256,9 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
-                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
                     </ul>
                 </li>
                 <li><a href="#">AKADEMIK ▼</a>
@@ -177,11 +314,40 @@
     </header>
 
     <div class="running-text">
-        <div class="announcement-label">Pengumuman 📢</div>
+        <div class="announcement-label">Sekilas Info 📢</div>
         <marquee onmouseover="this.stop();" onmouseout="this.start();">
-            Selamat Datang di Website Resmi SMPN SATU ATAP TUBAKI! Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026-2027 telah dibuka.
+            <% if (typeof runningText !== 'undefined' && runningText.pesan) { %>
+                <%= runningText.pesan %>
+            <% } else { %>
+                Selamat Datang di Website Resmi SMPN SATU ATAP TUBAKI! Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026-2027 telah dibuka.
+            <% } %>
         </marquee>
     </div>
+
+    <section class="welcome-section">
+        <div class="welcome-grid">
+            <div class="headmaster-img-wrapper">
+                <img src="/gambar/<%= (locals.sambutan && sambutan.foto) ? sambutan.foto : 'kepala-sekolah.jpg' %>" 
+                     class="headmaster-img" 
+                     alt="Kepala Sekolah" 
+                     onerror="this.onerror=null; this.src='/gambar/kepala-sekolah.jpg';">
+            </div>
+            <div class="welcome-content">
+                <h2 class="title-with-line">Sambutan Kepala Sekolah</h2>
+                <div class="welcome-text">
+                    <% if (locals.sambutan && sambutan.isi) { %>
+                        <%- sambutan.isi %>
+                    <% } else { %>
+                        <p>Teks sambutan belum diisi di dashboard admin.</p>
+                    <% } %>
+                </div>
+                <h4 style="color: var(--primary-blue); font-weight: 600; margin-bottom: 5px;">
+                    <%= (locals.sambutan && sambutan.nama_kepsek) ? sambutan.nama_kepsek : 'Nama Kepala Sekolah, S.Pd.' %>
+                </h4>
+                <p style="color: #888; font-size: 0.9rem;">Kepala Sekolah SMPN SATU ATAP TUBAKI</p>
+            </div>
+        </div>
+    </section>
 
     <section class="quick-access">
         <h2>Akses Cepat</h2>
@@ -204,20 +370,7 @@
             </a>
         </div>
     </section>
-
-    <section class="welcome-section">
-        <div class="welcome-container">
-            <div class="welcome-img">
-                <img src="/gambar/kepalasekolah.jpg" alt="Kepala Sekolah">
-            </div>
-            <div class="welcome-content">
-                <span>Sambutan Kepala Sekolah</span>
-                <h2>Selamat Datang di Keluarga Besar SMPN SATAP TUBAKI</h2>
-                <p>Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas karunia-Nya sehingga website resmi ini dapat terwujud...</p>
-            </div>
-        </div>
-    </section>
-
+    
     <section class="stats-container-new">
         <div class="stat-box blue-card">
             <div class="stat-info">
@@ -249,10 +402,10 @@
         </div>
     </section>
 
-    <section class="news-announcement-section" style="padding: 60px 5%; background: #f4f7f6;">
-        <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4%;">
+    <section class="news-announcement-section" style="padding: 60px 5%; background: #f8f9fa;">
+        <div class="main-layout-container">
             
-            <div style="flex: 0 0 68%; min-width: 320px;">
+            <div class="berita-col">
                 <h2 class="title-with-line">Berita Terbaru</h2>
                 <div class="swiper swiper-berita">
                     <div class="swiper-wrapper">
@@ -277,26 +430,42 @@
                 </div>
             </div>
 
-            <div style="flex: 0 0 28%; min-width: 280px;">
-                <h2 class="title-with-line" style="border-left-color: var(--danger-red);">Pengumuman</h2>
+            <div class="pengumuman-col">
+                <h2 class="title-with-line" style="border-left-color: #e74c3c;">Pengumuman</h2>
                 <div class="ann-list-dynamic">
                     <% if (typeof daftarPengumuman !== 'undefined' && daftarPengumuman.length > 0) { %>
                         <% daftarPengumuman.forEach(function(p) { %>
                             <div class="ann-item">
                                 <i class="fa-solid fa-file-pdf" style="color: var(--danger-red); font-size: 1rem; margin-top: 3px;"></i>
-                                <a href="/uploads/docs/<%= p.file_pdf %>" target="_blank" style="text-decoration:none; color:#333; font-size:0.85rem; font-weight:500; line-height: 1.3;">
+                                <a href="/uploads/docs/<%= p.file_pdf %>" target="_blank" style="text-decoration:none; color:#333; font-size:0.85rem; font-weight:500;">
                                     <%= p.judul %>
                                 </a>
                             </div>
                         <% }); %>
                     <% } else { %>
-                        <p style="font-size: 0.8rem; color: #999;">Tidak ada pengumuman terbaru.</p>
+                        <p style="font-size: 0.8rem; color: #999;">Tidak ada pengumuman.</p>
                     <% } %>
-
-                    <a href="/pengumuman" class="btn-all">LIHAT SELENGKAPNYA →</a>
+                    <a href="/pengumuman" class="btn-all">SEMUA →</a>
                 </div>
             </div>
-            
+
+            <div class="brosur-col">
+                <h2 class="title-with-line" style="border-left-color: #003366;">Brosur PPDB</h2>
+                <div style="background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <% if (locals.brosur) { %>
+                        <a href="#" id="openBrosurSidebar">
+                            <img src="/gambar/brosur/<%= brosur.gambar %>" alt="Brosur PPDB" class="brosur-display-img">
+                        </a>
+                        <div style="padding: 15px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; font-size: 1rem;"><%= brosur.judul %></h4>
+                            <a href="/gambar/brosur/<%= brosur.gambar %>" download class="btn-all" style="background: #003366; color: white; margin-top: 5px;">UNDUH BROSUR</a>
+                        </div>
+                    <% } else { %>
+                        <p style="font-size: 0.8rem; color: #999; text-align: center; padding: 20px;">Belum ada brosur.</p>
+                    <% } %>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -325,30 +494,45 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="/js/script.js"></script>
     <script>
-        // Inisialisasi Swiper Berita
+        window.onload = function() {
+            var modal = document.getElementById("brosurModal");
+            var span = document.getElementsByClassName("close-brosur")[0];
+            var sideBtn = document.getElementById("openBrosurSidebar");
+
+
+            if (span) { span.onclick = function() { modal.style.display = "none"; } }
+            if (sideBtn) {
+                sideBtn.onclick = function(e) { 
+                    e.preventDefault();
+                    modal.style.display = "block"; 
+                }
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) { modal.style.display = "none"; }
+            }
+        }
+
         var swiperBerita = new Swiper(".swiper-berita", {
             slidesPerView: 1,
-            spaceBetween: 25,
+            spaceBetween: 20,
             autoplay: { delay: 4000, disableOnInteraction: false },
             pagination: { el: ".swiper-pagination", clickable: true },
             breakpoints: {
                 768: { slidesPerView: 2 },
-                1200: { slidesPerView: 2 } 
+                1200: { slidesPerView: 2 } /* Disesuaikan karena kolom berita sekarang lebih sempit (45%) */
             }
         });
 
-        // Counter Statistik
         const counters = document.querySelectorAll('.counter');
         counters.forEach(counter => {
             const updateCount = () => {
                 const target = +counter.getAttribute('data-target');
                 const count = +counter.innerText;
-                const inc = target / 200;
+                const inc = target / 100;
                 if (count < target) {
                     counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 10);
+                    setTimeout(updateCount, 20);
                 } else {
                     counter.innerText = target;
                 }
@@ -356,7 +540,6 @@
             updateCount();
         });
 
-        // Set Tanggal Hari Ini
         const dateElement = document.getElementById('currentDate');
         if(dateElement) {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

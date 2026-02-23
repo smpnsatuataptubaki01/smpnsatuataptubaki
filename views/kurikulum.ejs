@@ -139,14 +139,15 @@
 </head>
 <body>
 
-    <div class="top-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 10%;">
-        <div class="logo-wrapper" style="display: flex; align-items: center;">
-            <img src="/gambar/logo1.png" alt="Logo" style="height: 60px; margin-right: 15px;">
-            <div>
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #003366; margin: 0;">SMPN SATU ATAP TUBAKI</h1>
-                <p style="font-size: 0.8rem; color: #666; margin: 0;">CERDAS, BERKARAKTER, BERBUDAYA</p>
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
             </div>
         </div>
+        <div class="date-info" id="currentDate"></div>
     </div>
 
     <nav>
@@ -155,14 +156,36 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
                     </ul>
                 </li>
-                <li><a href="/kurikulum" style="color: #b8860b;">AKADEMIK</a></li>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
+                    </ul>
+                </li>
                 <li><a href="/berita">BERITA</a></li>
-                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>
@@ -209,7 +232,7 @@
             <p style="color: #777; max-width: 600px; margin: 0 auto;">Distribusi alokasi waktu mata pelajaran per minggu untuk jenjang SMP.</p>
             
             <div class="mapel-grid">
-                <div class="mapel-item"><h4>Pendidikan Agama</h4><span>3 Jam</span></div>
+                <div class="mapel-item"><h4>Pendidikan Agama</h4><span>4 Jam</span></div>
                 <div class="mapel-item"><h4>Pendidikan Pancasila</h4><span>3 Jam</span></div>
                 <div class="mapel-item"><h4>Bahasa Indonesia</h4><span>6 Jam</span></div>
                 <div class="mapel-item"><h4>Matematika</h4><span>5 Jam</span></div>

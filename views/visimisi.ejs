@@ -177,30 +177,53 @@
 </head>
 <body>
 
-    <div class="top-header" style="display: flex; align-items: center; padding: 15px 10%; background: white;">
-        <img src="/gambar/logo1.png" alt="Logo" style="height: 55px; margin-right: 15px;">
-        <div style="line-height: 1.2;">
-            <span style="font-size: 0.75rem; color: #777; font-weight: 600; letter-spacing: 1px;">PROFIL LEMBAGA</span><br>
-            <span style="font-weight: bold; color: var(--primary-blue); font-size: 1.1rem;">SMPN SATU ATAP TUBAKI</span>
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
+            </div>
         </div>
+        <div class="date-info" id="currentDate"></div>
     </div>
 
     <nav>
         <div class="nav-container">
             <ul class="nav-menu">
                 <li><a href="/">🏠 HOME</a></li>
-                <li><a href="#" style="color: var(--accent-gold);">PROFIL ▼</a>
+                <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
-                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
                     </ul>
                 </li>
-                <li><a href="/kurikulum">AKADEMIK</a></li>
-                <li><a href="/osis">KESISWAAN</a></li>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
+                    </ul>
+                </li>
                 <li><a href="/berita">BERITA</a></li>
-                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>

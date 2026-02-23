@@ -3,182 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestasi - SMPN SATU ATAP TUBAKI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Prestasi Siswa - SMPN SATU ATAP TUBAKI</title>
+    <link rel="stylesheet" href="/css/style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
+        /* Penyesuaian agar gaya halaman serasi */
         :root {
             --primary-blue: #003366;
-            --gold: #b8860b;
-            --soft-gold: #f1c40f;
-            --bg-light: #fdfdfd;
+            --accent-gold: #b8860b;
         }
 
-        /* Hero Header */
-        .hero-prestasi {
-            background-image: linear-gradient(rgba(0, 51, 102, 0.75), rgba(0, 51, 102, 0.75)), 
-                              url('/gambar/bg-prestasi.jpg'); 
+        body {
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hero Section Prestasi */
+        .hero-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.9)), url('/gambar/hero-bg.jpg');
             background-size: cover;
             background-position: center;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
             color: white;
+            padding: 80px 20px;
+            text-align: center;
         }
 
-        .hero-prestasi h1 {
+        .hero-section h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.4);
         }
 
         /* Container Prestasi */
-        .prestasi-section {
-            padding: 80px 8%;
-            background-color: var(--bg-light);
-            text-align: center;
-        }
-
-        .section-title {
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-blue);
-            font-size: 2.8rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: "";
-            width: 80px;
-            height: 4px;
-            background: var(--gold);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Grid Prestasi */
-        .prestasi-grid {
+        .prestasi-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 60px;
+            padding: 50px 15px;
         }
 
-        .prestasi-item {
+        /* Card Style */
+        .prestasi-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: all 0.4s ease;
-            border: 1px solid #f0f0f0;
-            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
         }
 
-        .prestasi-item:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border-color: var(--gold);
+        .prestasi-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         .prestasi-img-wrapper {
-            position: relative;
-            height: 180px;
+            width: 100%;
+            height: 220px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
         .prestasi-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .prestasi-item:hover .prestasi-img {
-            transform: scale(1.1);
-        }
-
-        .badge-prestasi {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--gold);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            z-index: 1;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 10px;
         }
 
         .prestasi-info {
-            padding: 20px 15px;
+            padding: 20px;
         }
 
-        .prestasi-info h4 {
-            font-size: 1rem;
-            color: var(--primary-blue);
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .badge-kategori {
+            background: var(--accent-gold);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
             font-weight: 600;
-        }
-
-        .prestasi-info p {
-            font-size: 0.8rem;
-            color: var(--gold);
-            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Button Back */
-        .btn-home {
+        .prestasi-info h3 {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .pemenang {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            color: #999;
+        }
+
+        /* Footer Back Button */
+        .footer-action {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .btn-back-home {
             background: var(--primary-blue);
             color: white;
-            padding: 15px 40px;
+            padding: 12px 25px;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
+            font-weight: bold;
             transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
+            display: inline-block;
         }
 
-        .btn-home:hover {
-            background: #004a94;
+        .btn-back-home:hover {
+            background: #00509d;
             transform: scale(1.05);
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .hero-prestasi h1 { font-size: 2.5rem; }
-            .section-title h2 { font-size: 2rem; }
-            .prestasi-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 10%;">
-        <div class="logo-wrapper" style="display: flex; align-items: center;">
-            <img src="/gambar/logo1.png" alt="Logo" style="height: 60px; margin-right: 15px;">
-            <div>
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #003366; margin: 0;">SMPN SATU ATAP TUBAKI</h1>
-                <p style="font-size: 0.8rem; color: #666; margin: 0;">CERDAS, BERKARAKTER, BERBUDAYA</p>
+    <div class="top-header">
+        <div class="logo-wrapper">
+            <img src="/gambar/logo1.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+            <div style="line-height: 1;">
+                <span style="font-size: 0.7rem; color: #666;">Website Resmi</span><br>
+                <span style="font-weight: bold; color: #003366;">SMPN SATU ATAP TUBAKI</span>
             </div>
         </div>
+        <div class="date-info" id="currentDate"></div>
     </div>
 
     <nav>
@@ -187,141 +160,87 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
                     </ul>
                 </li>
-                <li><a href="#" style="color: var(--gold);">AKADEMIK ▼</a>
+                <li><a href="#">AKADEMIK ▼</a>
                     <ul class="submenu">
                         <li><a href="/kurikulum">Kurikulum</a></li>
-                        <li><a href="/prestasi">Prestasi</a></li>
+                        <li><a href="/kalender">Kalender Akademik</a></li>
                     </ul>
                 </li>
-                <li><a href="/osis">KESISWAAN</a></li>
+                <li><a href="/prestasi" style="color: #ffcc00;">PRESTASI</a></li>
+                
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
+                    </ul>
+                </li>
                 <li><a href="/berita">BERITA</a></li>
-                <li><a href="/galeri">GALERI</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>
         </div>
     </nav>
 
-    <header class="hero-prestasi">
-        <div class="hero-content">
-            <h1>Ruang Apresiasi</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9;">Mengukir Sejarah, Menebar Inspirasi di SMPN Satu Atap Tubaki</p>
-        </div>
-    </header>
-
-    <section class="prestasi-section">
-        <div class="section-title">
-            <h2>Papan Prestasi</h2>
-            <p style="color: #666; margin-top: 15px;">Daftar pencapaian gemilang siswa-siswi kami dalam berbagai ajang.</p>
-        </div>
-        
-        <div class="prestasi-grid">
-            <div class="prestasi-item">
-                <div class="badge-prestasi">JUARA 1</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/berita1.JPG" class="prestasi-img" alt="Lomba Pidato">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Lomba Pidato Bahasa</h4>
-                    <p>Kabupaten</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">JUARA 2</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/berita2.JPG" class="prestasi-img" alt="FLS2N">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Seni Tari (FLS2N)</h4>
-                    <p>Provinsi</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">EMAS</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/berita3.JPG" class="prestasi-img" alt="Karate">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Karate (O2SN)</h4>
-                    <p>Tingkat Nasional</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">FINALIS</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/berita4.JPG" class="prestasi-img" alt="Catur">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Turnamen Catur</h4>
-                    <p>Nasional</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">JUARA 1</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/berita5.JPG" class="prestasi-img" alt="Gerak Jalan">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Gerak Jalan HUT RI</h4>
-                    <p>Kecamatan</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">TERBAIK</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/bg-guru.JPG" class="prestasi-img" alt="Pramuka">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Regu Pramuka Terbaik</h4>
-                    <p>Jambore Cabang</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">JUARA 3</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/bg-akademik.JPG" class="prestasi-img" alt="Sains">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Olimpiade IPA</h4>
-                    <p>Kabupaten</p>
-                </div>
-            </div>
-
-            <div class="prestasi-item">
-                <div class="badge-prestasi">JUARA 1</div>
-                <div class="prestasi-img-wrapper">
-                    <img src="/gambar/bg-visi.JPG" class="prestasi-img" alt="Kebersihan">
-                </div>
-                <div class="prestasi-info">
-                    <h4>Sekolah Sehat</h4>
-                    <p>Antar Sekolah</p>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="/" class="btn-home">
-                <i class="fa-solid fa-house"></i> Kembali ke Beranda
-            </a>
-        </div>
+    <section class="hero-section">
+        <h1>Prestasi Siswa</h1>
+        <p>Inspirasi dari karya dan pencapaian siswa-siswi terbaik kami</p>
     </section>
 
-    <footer class="main-footer" style="background-color: #1a3a5f; color: white; padding: 60px 10% 20px;">
-        <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
-            <p style="font-size: 0.85rem; opacity: 0.6;">&copy; 2026 SMPN Satu Atap Tubaki. Hak Cipta Dilindungi.</p>
-        </div>
-    </footer>
+    <div class="prestasi-container">
+        <% if (typeof daftarPrestasi !== 'undefined' && daftarPrestasi.length > 0) { %>
+            <% daftarPrestasi.forEach(pres => { %>
+                <article class="prestasi-card">
+                    <div class="prestasi-img-wrapper">
+                        <img src="/gambar/prestasi/<%= pres.gambar %>" 
+                             alt="<%= pres.judul %>" 
+                             class="prestasi-img" 
+                             onerror="this.src='/gambar/default-prestasi.jpg'">
+                    </div>
+                    
+                    <div class="prestasi-info">
+                        <span class="badge-kategori"><%= pres.kategori %></span>
+                        <h3><%= pres.judul %></h3>
+                        <div class="pemenang">
+                            <i class="fas fa-award" style="color: #b8860b;"></i>
+                            <span>Oleh: <strong><%= pres.pemenang %></strong></span>
+                        </div>
+                    </div>
+                </article>
+            <% }) %>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-trophy fa-4x" style="margin-bottom: 20px; opacity: 0.2;"></i>
+                <h2>Belum Ada Data Prestasi</h2>
+                <p>Nantikan update pencapaian terbaru dari siswa-siswi kami.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="footer-action">
+        <a href="/" class="btn-back-home">
+            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('currentDate').innerHTML = new Date().toLocaleDateString('id-ID', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+    </script>
 
 </body>
 </html>

@@ -100,7 +100,6 @@
             line-height: 1.6;
         }
 
-        /* Badge Jadwal */
         .jadwal-badge {
             display: inline-block;
             background: #f0f0f0;
@@ -131,18 +130,42 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
                     </ul>
                 </li>
-                <li><a href="/ekstrakurikuler" style="color: #b8860b;">KESISWAAN ▼</a></li>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
+                    </ul>
+                </li>
                 <li><a href="/berita">BERITA</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>
         </div>
     </nav>
+
 
     <header class="hero-ekskul">
         <div class="hero-content">
@@ -158,40 +181,30 @@
         </div>
 
         <div class="ekskul-grid">
+            <%# CEK APAKAH VARIABEL daftarEkskul ADA DAN TIDAK KOSONG %>
             <% if (typeof daftarEkskul !== 'undefined' && daftarEkskul.length > 0) { %>
                 <% daftarEkskul.forEach(ekskul => { %>
                     <div class="ekskul-card">
-                        <img src="/gambar/<%= ekskul.gambar %>" alt="<%= ekskul.nama %>" class="ekskul-img">
+                        <%# PERBAIKAN: Menggunakan folder /gambar/ jika itu lokasi penyimpanan upload Anda %>
+                        <img src="/gambar/<%= ekskul.gambar %>" alt="<%= ekskul.nama %>" class="ekskul-img" onerror="this.src='/gambar/default-ekskul.jpg'">
                         <div class="ekskul-info">
-                            <i class="<%= ekskul.ikon %>"></i>
+                            <%# Ikon default piala jika di DB kosong %>
+                            <i class="fa-solid fa-trophy"></i>
                             <h3><%= ekskul.nama %></h3>
                             <p><%= ekskul.deskripsi %></p>
-                            <span class="jadwal-badge"><%= ekskul.jadwal %></span>
+                            <%# Tampilkan badge hanya jika kolom jadwal ada di DB (Opsional) %>
+                            <% if(ekskul.jadwal) { %>
+                                <span class="jadwal-badge"><%= ekskul.jadwal %></span>
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>
             <% } else { %>
-                <div class="ekskul-card">
-                    <img src="/gambar/berita1.JPG" alt="Pramuka" class="ekskul-img">
-                    <div class="ekskul-info">
-                        <i class="fa-solid fa-campground"></i>
-                        <h3>Pramuka</h3>
-                        <p>Membentuk karakter disiplin, mandiri, dan cinta alam melalui kegiatan kepanduan yang seru.</p>
-                        <span class="jadwal-badge">Sabtu, 14:00 WITA</span>
-                    </div>
+                <%# TAMPILAN JIKA TIDAK ADA DATA DI DATABASE %>
+                <div class="ekskul-grid" style="grid-column: 1/-1; text-align: center;">
+                    <p>Belum ada data kegiatan ekstrakurikuler yang ditambahkan.</p>
                 </div>
-
-                <div class="ekskul-card">
-                    <img src="/gambar/berita3.JPG" alt="Olahraga" class="ekskul-img">
-                    <div class="ekskul-info">
-                        <i class="fa-solid fa-volleyball"></i>
-                        <h3>Bola Voli & Futsal</h3>
-                        <p>Wadah bagi pecinta olahraga untuk mengasah teknik, kerja sama tim, dan sportivitas.</p>
-                        <span class="jadwal-badge">Jumat, 15:30 WITA</span>
-                    </div>
-                </div>
-                
-                <% } %>
+            <% } %>
         </div>
 
         <div style="text-align: center; margin-top: 60px;">

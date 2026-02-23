@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenaga Pendidik - SMPN SATU ATAP TUBAKI</title>
+    <title>Tenaga Pendidik & Kependidikan - SMPN SATU ATAP TUBAKI</title>
     
     <link rel="preload" as="image" href="/gambar/slide1.jpg">
     
@@ -17,13 +17,12 @@
             background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), 
                         url('/gambar/slide1.jpg') no-repeat center center;
             background-size: cover;
-            height: 300px; /* Sedikit diperpendek agar lebih proporsional */
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            /* Menghilangkan kedipan saat memuat */
             background-color: #003366; 
         }
 
@@ -44,7 +43,29 @@
         /* Container & Grid */
         .teachers-section {
             background-color: #f4f7f6;
-            padding: 80px 5%;
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #003366;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #b8860b;
+            border-radius: 2px;
         }
 
         .teachers-grid {
@@ -116,7 +137,7 @@
         .no-data {
             grid-column: 1 / -1;
             background: white;
-            padding: 60px;
+            padding: 40px;
             border-radius: 20px;
             text-align: center;
             color: #666;
@@ -155,13 +176,36 @@
                 <li><a href="/">🏠 HOME</a></li>
                 <li><a href="#">PROFIL ▼</a>
                     <ul class="submenu">
-                        <li><a href="/guru">Kepala Sekolah & Guru</a></li>
+                        <li><a href="/guru">Guru dan Staf</a></li>
                         <li><a href="/tentang-sekolah">Tentang Sekolah</a></li>
                         <li><a href="/visimisi">Visi & Misi</a></li>
-                        <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">AKADEMIK ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/kurikulum">Kurikulum</a></li>
+                        <li><a href="/prestasi">Prestasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">KESISWAAN ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/osis">OSIS</a></li>
+                        <li><a href="/ekstrakurikuler">Ekstrakurikuler</a></li>
                     </ul>
                 </li>
                 <li><a href="/berita">BERITA</a></li>
+                <li><a href="#">GALERI ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/galeri">Foto Kegiatan</a></li>
+                        <li><a href="/video">Video Dokumentasi</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PPDB ▼</a>
+                    <ul class="submenu">
+                        <li><a href="/persyaratan">Persyaratan</a></li>
+                        <li><a href="/formulir">Formulir Pendaftaran</a></li>
+                    </ul>
+                </li>
                 <li><a href="/kontak">KONTAK</a></li>
             </ul>
             <a href="/login" class="btn-login">👤 LOGIN</a>
@@ -170,14 +214,15 @@
 
     <header class="hero-teachers">
         <div class="hero-content">
-            <h1>Tenaga Pendidik</h1>
+            <h1>Profil guru & Staf</h1>
             <p>Berdedikasi dalam mendidik generasi emas bangsa</p>
         </div>
     </header>
 
     <section class="teachers-section">
-        <div class="teachers-grid">
-            
+        
+        <h2 class="section-title">Tenaga Pendidik</h2>
+        <div class="teachers-grid" style="margin-bottom: 80px;">
             <% if (typeof daftarGuru !== 'undefined' && daftarGuru.length > 0) { %>
                 <% daftarGuru.forEach(guru => { %>
                     <div class="teacher-card">
@@ -193,13 +238,35 @@
                 <% }) %>
             <% } else { %>
                 <div class="no-data">
-                    <i class="fa-solid fa-users-slash" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
-                    <h3>Belum Ada Data</h3>
-                    <p>Silakan upload data guru melalui Dashboard Admin.</p>
+                    <i class="fa-solid fa-users-slash" style="font-size: 3rem; color: #ddd; margin-bottom: 15px;"></i>
+                    <h3>Data Guru Belum Ada</h3>
                 </div>
             <% } %>
-
         </div>
+
+        <h2 class="section-title">Tenaga Kependidikan</h2>
+        <div class="teachers-grid">
+            <% if (typeof daftarStaf !== 'undefined' && daftarStaf.length > 0) { %>
+                <% daftarStaf.forEach(staf => { %>
+                    <div class="teacher-card">
+                        <div class="teacher-img-wrapper">
+                            <img src="/gambar/<%= staf.foto %>" 
+                                 alt="<%= staf.nama %>" 
+                                 class="teacher-img"
+                                 onerror="this.src='/gambar/default-user.png'">
+                        </div>
+                        <h3><%= staf.nama %></h3>
+                        <span class="role"><%= staf.jabatan %></span>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="no-data">
+                    <i class="fa-solid fa-user-tie" style="font-size: 3rem; color: #ddd; margin-bottom: 15px;"></i>
+                    <h3>Data Tenaga Kependidikan Belum Tersedia</h3>
+                </div>
+            <% } %>
+        </div>
+
     </section>
 
     <footer class="main-footer">
