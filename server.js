@@ -71,9 +71,12 @@ app.use(session({
 const db = mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || '',
+    password: process.env.DB_PASSWORD || '', // Pastikan DB_PASSWORD sesuai dengan di Railway
     database: process.env.DB_NAME || 'smpn_tubaki',
-    multipleStatements: true 
+    multipleStatements: true,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 db.connect((err) => {
