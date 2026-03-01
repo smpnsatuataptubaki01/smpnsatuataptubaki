@@ -45,6 +45,10 @@ folders.forEach(dir => {
         fs.mkdirSync(dir, { recursive: true });
     }
 });
+// Daftarkan folder uploads agar bisa diakses publik
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+// Atau jika folder uploads berada di luar folder public:
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- 5. PENGATURAN MIDDLEWARE & ENGINE ---
 app.set('view engine', 'ejs');
@@ -71,7 +75,7 @@ app.use(session({
 const db = mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '', // Pastikan DB_PASSWORD sesuai dengan di Railway
+    password: process.env.DB_PASSWORD || '', 
     database: process.env.DB_NAME || 'smpn_tubaki',
     multipleStatements: true,
     ssl: {
@@ -80,8 +84,11 @@ const db = mysql.createConnection({
 });
 
 db.connect((err) => {
-    if (err) return console.error('❌ Database Error:', err.message);
-    console.log('✅ Database Terhubung.');
+    if (err) {
+        console.error('❌ Database Error:', err.message);
+    } else {
+        console.log('✅ Database Terhubung.');
+    }
 });
 
 const transporter = nodemailer.createTransport({
@@ -132,6 +139,7 @@ const upload = multer({ storage: storage });
 
 // --- 9. RUTE USER ---
 app.get('/', (req, res) => {
+    // Note: Pastikan semua tabel ini (slider, berita, pengumuman, sambutan, brosur, running_text, statistik) sudah dibuat di TiDB
     const sql = `
         SELECT * FROM slider ORDER BY id DESC;
         SELECT * FROM berita ORDER BY id DESC LIMIT 3;
@@ -142,7 +150,10 @@ app.get('/', (req, res) => {
         SELECT * FROM statistik LIMIT 1;
     `;
     db.query(sql, (err, results) => {
-        if (err) return res.status(500).send("Database Error di Halaman Utama");
+        if (err) {
+            console.error("❌ Error di Halaman Utama:", err.message);
+            return res.status(500).send("Database Error di Halaman Utama: " + err.message);
+        }
         res.render('index', { 
             daftarSlider: results[0] || [],
             daftarBerita: results[1] || [],
@@ -183,7 +194,7 @@ app.get('/berita/:id', (req, res) => {
 });
 
 app.get('/guru', (req, res) => {
-    // Kita bagi query menjadi dua: satu untuk pendidik, satu untuk kependidikan
+
     const sqlPendidik = "SELECT * FROM guru WHERE kategori = 'pendidik' ORDER BY id ASC";
     const sqlStaf = "SELECT * FROM guru WHERE kategori = 'kependidikan' ORDER BY id ASC";
     
@@ -192,14 +203,14 @@ app.get('/guru', (req, res) => {
             console.error("❌ Error Database Guru:", err);
             return res.status(500).send("Database Error");
         }
-        
-        // results[0] berisi data pendidik
-        // results[1] berisi data kependidikan
+
         res.render('guru', { 
-            daftarGuru: results[0] || [],       // Akan muncul di bagian Tenaga Pendidik
-            daftarStaf: results[1] || []        // Akan muncul di bagian Tenaga Kependidikan
+
+            daftarGuru: results[0] || [],
+            daftarStaf: results[1] || []
         });
     });
+
 });
 
 app.get('/tentang-sekolah', (req, res) => res.render('tentang-sekolah'));
@@ -242,7 +253,9 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin123') {
+
+    // Ganti 'admin_baru' dan 'password_baru' sesuai keinginan Anda
+    if (username === 'admin' && password === 'tubaki2026@@') { 
         req.session.isAdmin = true;
         req.session.save(() => res.redirect('/admin'));
     } else {
@@ -258,8 +271,8 @@ app.get('/logout', (req, res) => {
 app.get('/admin', checkLogin, (req, res) => {
     const sql = `
         SELECT * FROM pengumuman ORDER BY id DESC;
-        SELECT * FROM guru WHERE kategori = 'pendidik' ORDER BY id DESC; -- Query 1: Pendidik
-        SELECT * FROM guru WHERE kategori = 'kependidikan' ORDER BY id DESC; -- Query 2: Staf
+        SELECT * FROM guru WHERE kategori = 'pendidik' ORDER BY id DESC;
+        SELECT * FROM guru WHERE kategori = 'kependidikan' ORDER BY id DESC;
         SELECT * FROM pendaftaran ORDER BY id DESC;
         SELECT * FROM berita ORDER BY id DESC;
         SELECT * FROM slider ORDER BY id DESC;
@@ -274,13 +287,15 @@ app.get('/admin', checkLogin, (req, res) => {
         SELECT * FROM brosur ORDER BY id DESC;
     `;
     db.query(sql, (err, results) => {
-        if (err) return res.status(500).send("Database Error Panel Admin");
+        if (err) {
+            console.error("❌ Error Panel Admin:", err.message);
+            return res.status(500).send("Database Error Panel Admin: " + err.message);
+        }
 
-        // Pastikan urutan indeks [0, 1, 2, dst] sesuai dengan urutan SELECT di atas
         res.render('admin', { 
             daftarPengumuman: results[0] || [], 
-            daftarGuru: results[1] || [],       // Guru (Pendidik)
-            daftarStaf: results[2] || [],       // <--- INI YANG TADI KURANG
+            daftarGuru: results[1] || [], 
+            daftarStaf: results[2] || [], 
             daftarPendaftar: results[3] || [], 
             daftarBerita: results[4] || [],
             daftarSlider: results[5] || [], 
@@ -372,8 +387,63 @@ app.post('/admin/update-running-text', checkLogin, (req, res) => {
     });
 });
 
-app.post('/admin/tambah-berita', checkLogin, upload.single('gambar_berita'), (req, res) => {
-    db.query("INSERT INTO berita (judul, isi, gambar) VALUES (?,?,?)", [req.body.judul, req.body.isi, req.file ? req.file.filename : null], () => res.redirect('/admin'));
+app.post('/admin/berita/tambah', checkLogin, upload.single('gambar_berita'), (req, res) => {
+    const { judul, isi } = req.body;
+    const gambar = req.file ? req.file.filename : null;
+
+    // Perhatikan: Kita tidak perlu memasukkan tgl_posting di sini
+    const sql = "INSERT INTO berita (judul, isi, gambar) VALUES (?, ?, ?)";
+    
+    db.query(sql, [judul, isi, gambar], (err, result) => {
+        if (err) {
+            console.error("❌ Gagal posting berita:", err);
+            return res.status(500).send("Error database.");
+        }
+        res.redirect('/admin#berita-panel');
+    });
+});
+// --- FITUR EDIT BERITA ---
+
+// 1. Menampilkan Halaman Formulir Edit
+app.get('/admin/berita/edit/:id', checkLogin, (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM berita WHERE id = ?";
+    
+    db.query(sql, [id], (err, results) => {
+        if (err) {
+            console.error("Error fetching berita:", err);
+            return res.status(500).send("Terjadi kesalahan pada database.");
+        }
+        if (results.length === 0) {
+            return res.status(404).send("Berita tidak ditemukan.");
+        }
+        
+        // Mengirim data berita yang dipilih ke file edit_berita.ejs
+        res.render('edit_berita', { berita: results[0] });
+    });
+});
+
+// 2. Memproses Update Data Berita (POST)
+app.post('/admin/berita/update/:id', checkLogin, upload.single('gambar_berita'), (req, res) => {
+    const id = req.params.id;
+    const { judul, isi } = req.body;
+    const gambarBaru = req.file ? req.file.filename : null;
+
+    if (gambarBaru) {
+        // Jika ada unggahan gambar baru, update judul, isi, dan gambar
+        const sql = "UPDATE berita SET judul = ?, isi = ?, gambar = ? WHERE id = ?";
+        db.query(sql, [judul, isi, gambarBaru, id], (err) => {
+            if (err) return res.status(500).send("Gagal mengupdate berita: " + err.message);
+            res.redirect('/admin#berita');
+        });
+    } else {
+        // Jika tidak ada gambar baru, hanya update judul dan isi
+        const sql = "UPDATE berita SET judul = ?, isi = ? WHERE id = ?";
+        db.query(sql, [judul, isi, id], (err) => {
+            if (err) return res.status(500).send("Gagal mengupdate berita: " + err.message);
+            res.redirect('/admin#berita');
+        });
+    }
 });
 
 app.get('/admin/hapus-berita/:id', checkLogin, (req, res) => {
@@ -387,13 +457,10 @@ app.get('/admin/hapus-pengumuman/:id', checkLogin, (req, res) => {
     db.query("DELETE FROM pengumuman WHERE id=?", [req.params.id], () => res.redirect('/admin'));
 });
 
-// --- Update Tambah Guru & Staf ---
 app.post('/admin/tambah-guru', checkLogin, upload.single('foto'), (req, res) => {
-    // Pastikan 'kategori' diambil dari req.body (dropdown di admin.ejs)
     const { nama, jabatan, kategori } = req.body; 
     const foto = req.file ? req.file.filename : null;
     
-    // Validasi sederhana agar kategori tidak kosong
     if (!kategori) {
         return res.send('<script>alert("Silakan pilih kategori!"); window.history.back();</script>');
     }
@@ -408,9 +475,7 @@ app.post('/admin/tambah-guru', checkLogin, upload.single('foto'), (req, res) => 
     });
 });
 
-// --- Rute Hapus (Berlaku untuk Guru maupun Staf) ---
 app.get('/admin/hapus-guru/:id', checkLogin, (req, res) => {
-    // Opsional: Tambahkan logika hapus file fisik foto di sini jika diinginkan
     db.query("DELETE FROM guru WHERE id=?", [req.params.id], (err) => {
         if (err) console.error("❌ Gagal Hapus:", err);
         res.redirect('/admin');
@@ -438,25 +503,64 @@ app.get('/admin/prestasi/hapus/:id', checkLogin, (req, res) => {
     db.query("DELETE FROM prestasi WHERE id=?", [req.params.id], () => res.redirect('/admin'));
 });
 
+/// --- BAGIAN STRUKTUR OSIS ---
+
+// Tambah Struktur
 app.post('/admin/osis/struktur/tambah', checkLogin, upload.single('foto_pengurus'), (req, res) => {
-    db.query("INSERT INTO osis_struktur (nama, jabatan, foto) VALUES (?,?,?)", [req.body.nama, req.body.jabatan, req.file ? req.file.filename : 'default.jpg'], () => res.redirect('/admin'));
+    const { nama, jabatan } = req.body;
+    const foto = req.file ? req.file.filename : 'default.jpg';
+    
+    db.query("INSERT INTO osis_struktur (nama, jabatan, foto) VALUES (?, ?, ?)", 
+    [nama, jabatan, foto], (err) => {
+        if (err) return res.status(500).send("Gagal: " + err.message);
+        res.redirect('/admin#osis-panel');
+    });
 });
 
+// Hapus Struktur
+app.get('/admin/osis/struktur/hapus/:id', checkLogin, (req, res) => {
+    db.query("DELETE FROM osis_struktur WHERE id = ?", [req.params.id], (err) => {
+        if (err) return res.status(500).send("Gagal: " + err.message);
+        res.redirect('/admin#osis-panel');
+    });
+});
+
+// --- BAGIAN KEGIATAN OSIS ---
+
+// Tambah Kegiatan
 app.post('/admin/osis/kegiatan/tambah', checkLogin, upload.single('gambar_kegiatan'), (req, res) => {
     const { nama_kegiatan, tanggal } = req.body; 
     const gambar = req.file ? req.file.filename : null;
+    
+    // Pastikan menggunakan judul_kegiatan sesuai struktur tabel Anda
     const sql = "INSERT INTO osis_kegiatan (judul_kegiatan, gambar, tanggal) VALUES (?, ?, ?)";
-    db.query(sql, [nama_kegiatan, gambar, tanggal], (err, result) => {
+    db.query(sql, [nama_kegiatan, gambar, tanggal], (err) => {
         if (err) {
-            console.error("❌ SQL Error OSIS Kegiatan:", err);
+            console.error("❌ SQL Error:", err);
             return res.status(500).send("Gagal menyimpan: " + err.message);
         }
         res.redirect('/admin#osis-panel');
     });
 });
 
-app.get('/admin/osis/struktur/hapus/:id', checkLogin, (req, res) => {
-    db.query("DELETE FROM osis_struktur WHERE id=?", [req.params.id], () => res.redirect('/admin'));
+// PASTIKAN MENGGUNAKAN app.get
+app.get('/admin/osis/kegiatan/hapus/:id', checkLogin, (req, res) => {
+    const idHapus = req.params.id;
+    
+    // 1. Log untuk memastikan rute ini terpanggil oleh server
+    console.log("Mencoba menghapus kegiatan ID:", idHapus);
+
+    const sql = "DELETE FROM osis_kegiatan WHERE id = ?";
+    db.query(sql, [idHapus], (err, result) => {
+        if (err) {
+            console.error("❌ SQL Error:", err);
+            return res.status(500).send("Gagal hapus di database");
+        }
+        
+        // 2. Jika berhasil, kembali ke panel osis
+        console.log("✅ Berhasil hapus ID:", idHapus);
+        res.redirect('/admin#osis-panel');
+    });
 });
 
 app.get('/admin/ekspor-ppdb', checkLogin, (req, res) => {

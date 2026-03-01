@@ -400,28 +400,51 @@
         </div>
 
         <div id="berita" class="panel">
-            <div class="card">
-                <h3>Tambah Berita & Artikel</h3>
-                <form action="/admin/tambah-berita" method="POST" enctype="multipart/form-data" class="admin-form">
-                    <input type="text" name="judul" placeholder="Judul Berita" class="full-width" required>
-                    <textarea name="isi" placeholder="Isi Berita..." class="full-width" rows="5" required></textarea>
-                    <input type="file" name="gambar_berita" accept="image/*" class="full-width" required>
-                    <button type="submit" class="btn btn-view full-width">Posting Berita</button>
-                </form>
-                <table>
-                    <thead><tr><th>Gambar</th><th>Judul</th><th>Aksi</th></tr></thead>
-                    <tbody>
-                        <% daftarBerita.forEach(b => { %>
-                            <tr>
-                                <td><img src="/gambar/<%= b.gambar %>" class="table-img"></td>
-                                <td><%= b.judul %></td>
-                                <td><a href="/admin/hapus-berita/<%= b.id %>" class="btn btn-del"><i class="fas fa-trash"></i></a></td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="card">
+        <h3>Tambah Berita & Artikel</h3>
+        <form action="/admin/tambah-berita" method="POST" enctype="multipart/form-data" class="admin-form">
+            <input type="text" name="judul" placeholder="Judul Berita" class="full-width" required>
+            <textarea name="isi" placeholder="Isi Berita..." class="full-width" rows="5" required></textarea>
+            <input type="file" name="gambar_berita" accept="image/*" class="full-width" required>
+            <button type="submit" class="btn btn-view full-width">Posting Berita</button>
+        </form>
+
+        <hr>
+
+        <h3>Daftar Berita</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Gambar</th>
+                    <th>Judul</th>
+                    <th style="text-align: center;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof daftarBerita !== 'undefined' && daftarBerita.length > 0) { %>
+                    <% daftarBerita.forEach(b => { %>
+                        <tr>
+                            <td><img src="/gambar/<%= b.gambar %>" class="table-img" onerror="this.src='/gambar/default.jpg'"></td>
+                            <td><%= b.judul %></td>
+                            <td style="text-align: center; white-space: nowrap;">
+                                <a href="/admin/berita/edit/<%= b.id %>" class="btn btn-edit" style="background-color: #ffc107; color: #000; padding: 5px 10px; border-radius: 4px; text-decoration: none; margin-right: 5px;">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/admin/hapus-berita/<%= b.id %>" class="btn btn-del" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')" style="background-color: #dc3545; color: #fff; padding: 5px 10px; border-radius: 4px; text-decoration: none;">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3" style="text-align: center;">Belum ada berita.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
         <div id="pengumuman" class="panel">
             <div class="card">

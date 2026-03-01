@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Berita - Admin SMPN Satap Tubaki</title>
+    <link rel="stylesheet" href="/css/admin.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .edit-container { max-width: 800px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn-save { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .btn-back { background: #6c757d; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; display: inline-block; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="edit-container">
+        <h2><i class="fas fa-edit"></i> Edit Berita</h2>
+        <hr>
+        <form action="/admin/berita/update/<%= berita.id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Judul Berita</label>
+                <input type="text" name="judul" value="<%= berita.judul %>" required>
+            </div>
+            <div class="form-group">
+                <label>Isi Berita</label>
+                <textarea name="isi" rows="10" required><%= berita.isi %></textarea>
+            </div>
+            <div class="form-group">
+                <label>Gambar Saat Ini</label>
+                <img src="/gambar/<%= berita.gambar %>" style="width: 150px; display: block; margin-bottom: 10px; border-radius: 4px;">
+                <label>Ganti Gambar (Biarkan kosong jika tidak ingin ganti)</label>
+                <input type="file" name="gambar_berita" accept="image/*">
+            </div>
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn-save"><i class="fas fa-save"></i> Simpan Perubahan</button>
+                <a href="/admin#berita" class="btn-back">Batal</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

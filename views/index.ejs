@@ -414,8 +414,18 @@
                                 <div class="swiper-slide">
                                     <div class="news-card">
                                         <img src="/gambar/<%= berita.gambar %>" class="news-img" onerror="this.src='/gambar/default.jpg'">
-                                        <div class="news-text">
+                                                                                <div class="news-text">
                                             <h4><%= berita.judul %></h4>
+                                            
+                                            <div style="font-size: 0.75rem; color: #888; margin-bottom: 8px; display: flex; align-items: center;">
+                                                <i class="bi bi-calendar-event" style="margin-right: 5px;"></i>
+                                                <%= new Date(berita.tgl_posting).toLocaleDateString('id-ID', { 
+                                                    day: 'numeric', 
+                                                    month: 'long', 
+                                                    year: 'numeric' 
+                                                }) %>
+                                            </div>
+
                                             <p style="font-size: 0.85rem; color: #666; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                                                 <%= berita.isi ? berita.isi.replace(/<[^>]*>?/gm, '') : '' %>
                                             </p>
@@ -484,7 +494,7 @@
                 <div class="social-links">
                     <a href="#"><i class="fa-brands fa-facebook"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@nanaenoeofficial"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>

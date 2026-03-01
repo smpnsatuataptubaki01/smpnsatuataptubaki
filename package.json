@@ -1,4 +1,10 @@
 {
+  "name": "smpn-tubaki",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "dotenv": "^17.3.1",
     "ejs": "^4.0.1",
