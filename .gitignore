@@ -1,7 +1,4 @@
 node_modules/
 .env
 .DS_Store
-public/uploads/docs/*
-public/gambar/osis/kegiatan/*
-public/gambar/galeri/*
 !public/uploads/docs/.gitkeep
